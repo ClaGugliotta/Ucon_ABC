@@ -26,8 +26,8 @@ public class AccessControll{
     private static String string = "[1] Manager [2] Factory Manager [3] Department Manager [4] Operator [5] Programmer";
     private static String string2 = "[1] statistic [2] robot1 [3] robot2 [4] computer1";
     private static int array[] = {1,2,3,4,5};
-    private static String users[] = {"Manager","Factory_Manager","Department_Manager","Operator","Programmer"};
-    private static String machines[] ={"statistic","robot1","robot2","computer1"};
+    private static String users[] = {"manager","factory_manager","department_manager","operator","programmer"};
+    private static String machines[] ={"statistic","robota","robotb","computer"};
 
 
     public static void main(String[] args){
@@ -58,7 +58,7 @@ public class AccessControll{
         if(usr != null && machine != null){
             selezione = Integer.valueOf(usr);
             selezionemacchina = Integer.valueOf(machine);
-            String request = createXACMLRequest(users[selezione-1],machines[selezionemacchina-1]);
+            String request = createXACMLRequest(users[selezione-1],"Descendants");
             String response = new Pdp().evaluationRequest(balana,request);
             System.out.println(response);
         }

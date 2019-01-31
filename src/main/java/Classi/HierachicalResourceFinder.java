@@ -57,14 +57,9 @@ public class HierachicalResourceFinder extends ResourceFinderModule {
         if("root".equals(parentResourceId.encode())){
             Set<AttributeValue> set = new HashSet<AttributeValue>();
             try{
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "statistic"));
 
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/statistic"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/robot1a"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/robot2a"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/computer1"));
             } catch (Exception e) {
                 // just ignore
             }
@@ -84,14 +79,15 @@ public class HierachicalResourceFinder extends ResourceFinderModule {
             return result;
         }
 
-        if("fabbrica".equals(parentResourceId.encode())){
+        if("root".equals(parentResourceId.encode())){
             Set<AttributeValue> set = new HashSet<AttributeValue>();
             try{
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto"));
                 set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "statistic"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/robot1a"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/computer01"));
-                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "fabbrica/repartoa/sistema1/robot1b"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto/sistema"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto/sistema/robota"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto/sistema/robotb"));
+                set.add(Balana.getInstance().getAttributeFactory().createValue(new URI(DATA_TYPE), "reparto/sistema/computer"));
             } catch (Exception e) {
                 // just ignore
             }
