@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:permit-overrides" PolicyId="Time_Worker_Policy" Version="1.0">
+  <Description>Policy per orario lavorativo worker</Description>
+  <Target>
+    <AnyOf>
+      <AllOf>
+        <Match MatchId="urn:oasis:names:tc:xacml:2.0:function:time-in-range">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">9:00:00, 9:00:00, 18:00:00</AttributeValue>
+          <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attributecategory:resource" AttributeId="urn:oasis:names:tc:xacml:1.0:subject:authentication-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true"></AttributeDesignator>
+        </Match>
+      </AllOf>
+    </AnyOf>
+  </Target>
+  <Rule Effect="Permit" RuleId="work_time">
+    <Target>
+      <AnyOf>
+        <AllOf>
+          <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:dateTime-greater-than-or-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">9:00:00</AttributeValue>
+            <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subjectcategory:requestingmachine" AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true"></AttributeDesignator>
+          </Match>
+        </AllOf>
+      </AnyOf>
+    </Target>
+    <Condition>
+      <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+        <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subjectcategory:accesssubject" AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true"></AttributeDesignator>
+        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">9:00:00</AttributeValue>
+      </Apply>
+    </Condition>
+  </Rule>
+  <Rule Effect="Permit" RuleId="finish_work_time">
+    <Target>
+      <AnyOf>
+        <AllOf>
+          <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">18:00:00</AttributeValue>
+            <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subjectcategory:accesssubject" AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true"></AttributeDesignator>
+          </Match>
+        </AllOf>
+      </AnyOf>
+    </Target>
+    <Condition>
+      <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+        <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subjectcategory:accesssubject" AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true"></AttributeDesignator>
+        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">18:00:00</AttributeValue>
+      </Apply>
+    </Condition>
+  </Rule>
+  <Rule Effect="Deny" RuleId="deny_all"></Rule>
+</Policy>
