@@ -39,7 +39,7 @@ public class AttributeController extends AttributeFinderModule{
     @Override
     public Set getSupportedIds() {
         Set<String> ids = new HashSet<String>();
-        ids.add("http://test.org/claim/role");
+        ids.add("subject");
         return ids;
     }
 
@@ -67,6 +67,7 @@ public class AttributeController extends AttributeFinderModule{
 
     @Override
     public boolean isDesignatorSupported() {
+
         return true;
     }
 }

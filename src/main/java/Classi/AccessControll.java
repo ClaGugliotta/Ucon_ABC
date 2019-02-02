@@ -58,8 +58,8 @@ public class AccessControll{
         if(usr != null && machine != null){
             selezione = Integer.valueOf(usr);
             selezionemacchina = Integer.valueOf(machine);
-            String request = createXACMLRequest(users[selezione-1],"Descendants");
-            String response = new Pdp().evaluationRequest(balana,request);
+            String request = createXACMLRequest(users[selezione-1],"Children");
+            Boolean response = new Pdp().askEvaluation(balana,request,machines[selezionemacchina-1]);
             System.out.println(response);
         }
         else{
